@@ -1,15 +1,10 @@
+import 'package:advanced/core/routing/app_router.dart';
+import 'package:advanced/doc_app.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp( DocApp(
+    appRouter: AppRouter(),
+  ));
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(debugShowCheckedModeBanner: false, home: Scaffold());
-  }
-}
