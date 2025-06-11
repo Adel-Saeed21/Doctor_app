@@ -1,4 +1,6 @@
 import 'package:advanced/core/routing/app_router.dart';
+import 'package:advanced/core/routing/routes.dart';
+import 'package:advanced/core/theming/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -11,14 +13,16 @@ class DocApp extends StatelessWidget {
       designSize: const Size(375, 812),
       minTextAdapt: true,
       splitScreenMode: true,
-     child: MaterialApp(
+      child: MaterialApp(
         title: 'Doc App',
         theme: ThemeData(
-          primarySwatch: Colors.blue
+          primaryColor: ColorsManager.primaryBlue,
+          scaffoldBackgroundColor: Colors.white,
         ),
+        initialRoute: Routes.onBoardingScreen,
+        debugShowCheckedModeBanner: false,
         onGenerateRoute: appRouter.generateRoute,
-
-     ),
+      ),
     );
   }
 }
