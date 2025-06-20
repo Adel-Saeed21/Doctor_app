@@ -10,7 +10,7 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => const Onboardingscreen());
       case Routes.loginScreen:
         return MaterialPageRoute(builder: (_) => const LoginScreen());
-
+      
       default:
         return MaterialPageRoute(builder: (_) => Scaffold());
     }
