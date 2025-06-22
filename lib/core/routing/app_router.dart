@@ -12,7 +12,7 @@ class AppRouter {
         return MaterialPageRoute(builder: (_) => const LoginScreen());
       
       default:
-        return MaterialPageRoute(builder: (_) => Scaffold());
+        return MaterialPageRoute(builder: (_) =>const Scaffold());
     }
   }
 }
