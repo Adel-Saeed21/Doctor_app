@@ -36,56 +36,53 @@ class _LoginScreenState extends State<LoginScreen> {
                   style: TextStyles.font14GreyRegular,
                 ),
                 verticalSpace(36.h),
-                Form(
-                  key: formKey,
-                  child: Column(
-                    children: [
-                      AppTextFormField(
-                        hintText: 'Email',
-                        radius: 16,
-                        backgroundColor: ColorsManager.moreLightGray,
-                        enableBorderColor: ColorsManager.lightGray,
-                        focusBorderColor: ColorsManager.primaryBlue,
-                        textStyle: TextStyles.font14DarkBlueMedium,
-                      ),
-                      verticalSpace(18.h),
-                      AppTextFormField(
-                        hintText: 'Password',
-                        radius: 16,
-                        backgroundColor: ColorsManager.moreLightGray,
-                        enableBorderColor: ColorsManager.lightGray,
-                        focusBorderColor: ColorsManager.primaryBlue,
-                        textStyle: TextStyles.font14DarkBlueMedium,
-                        isSecure: isObsecure,
-                        suffixIcon: GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              isObsecure = !isObsecure;
-                            });
-                          },
-                          child: Icon(
-                            isObsecure
-                                ? Icons.visibility_off
-                                : Icons.visibility,
-                          ),
+                Column(
+                  children: [
+                    AppTextFormField(
+                      hintText: 'Email',
+                      radius: 16,
+                      backgroundColor: ColorsManager.moreLightGray,
+                      enableBorderColor: ColorsManager.lightGray,
+                      focusBorderColor: ColorsManager.primaryBlue,
+                      textStyle: TextStyles.font14DarkBlueMedium,
+                    ),
+                    verticalSpace(18.h),
+                    AppTextFormField(
+                      hintText: 'Password',
+                      radius: 16,
+                      backgroundColor: ColorsManager.moreLightGray,
+                      enableBorderColor: ColorsManager.lightGray,
+                      focusBorderColor: ColorsManager.primaryBlue,
+                      textStyle: TextStyles.font14DarkBlueMedium,
+                      isSecure: isObsecure,
+                      suffixIcon: GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            isObsecure = !isObsecure;
+                          });
+                        },
+                        child: Icon(
+                          isObsecure
+                              ? Icons.visibility_off
+                              : Icons.visibility,
                         ),
                       ),
-                      verticalSpace(24.h),
-                      Align(
-                        alignment: AlignmentDirectional.centerEnd,
-                        child: Text(
-                          "Forgot Password?",
-                          style: TextStyles.font13BlueRegular,
-                        ),
+                    ),
+                    verticalSpace(24.h),
+                    Align(
+                      alignment: AlignmentDirectional.centerEnd,
+                      child: Text(
+                        "Forgot Password?",
+                        style: TextStyles.font13BlueRegular,
                       ),
-                      verticalSpace(25.h),
-                      AppButton(buttonText: 'Login', onPressed: () {}),
-                      verticalSpace(16.h),
-                      const TermsAndConditionsText(),
-                      verticalSpace(64.h),
-                      const AlreadyHaveAccountText(),
-                    ],
-                  ),
+                    ),
+                    verticalSpace(25.h),
+                    AppButton(buttonText: 'Login', onPressed: () {}),
+                    verticalSpace(16.h),
+                    const TermsAndConditionsText(),
+                    verticalSpace(64.h),
+                    const AlreadyHaveAccountText(),
+                  ],
                 ),
               ],
             ),
