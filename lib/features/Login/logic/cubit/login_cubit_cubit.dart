@@ -6,21 +6,22 @@ import 'package:flutter_bloc/flutter_bloc.dart' show Cubit;
 
 class LoginCubitCubit extends Cubit<LoginCubitState> {
   final LoginRepo _loginRepo;
-  LoginCubitCubit(this._loginRepo) : super(const LoginCubitState.initial());
+  LoginCubitCubit(this._loginRepo) : super(const LoginInitial());
+
 
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  final formKey = GlobalKey();
+  final formKey = GlobalKey<FormState>();
 
   void emitLoginState(LoginRequestBody loginRequestBody) async {
-    emit(const LoginCubitState.loading());
+    emit(const LoginLoading());
     final response = await _loginRepo.login(loginRequestBody);
     response.when(
       success: (loginResponse) {
-        emit(LoginCubitState.success(loginResponse));
+        emit(LoginSuccess(loginResponse));
       },
       failure: (mess) {
-        emit(LoginCubitState.error(error: mess));
+        emit(LoginError(errorMessage: mess));
       },
     );
   }

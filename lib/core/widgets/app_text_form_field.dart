@@ -45,10 +45,13 @@ class AppTextFormField extends StatelessWidget {
         enabledBorder: textFiledBorderType(radius, enableBorderColor),
         focusedBorder: textFiledBorderType(radius, focusBorderColor),
         errorBorder: textFiledBorderType(radius, Colors.red),
+        focusedErrorBorder: textFiledBorderType(radius, Colors.red),
+        border: textFiledBorderType(radius, enableBorderColor),
         hintStyle: TextStyles.font14LightGreyRegular,
         hintText: hintText,
         suffixIcon: suffixIcon,
       ),
+
       obscureText: isSecure ?? false,
       style: textStyle ?? TextStyles.font14DarkBlueMedium,
     );

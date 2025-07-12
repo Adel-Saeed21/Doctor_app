@@ -1,3 +1,4 @@
+import 'package:advanced/core/helpers/app_regex.dart';
 import 'package:advanced/core/helpers/spacing.dart';
 import 'package:advanced/core/theming/colors.dart';
 import 'package:advanced/core/theming/style.dart';
@@ -18,17 +19,30 @@ class EmailAndPassword extends StatefulWidget {
 class _EmailAndPasswordState extends State<EmailAndPassword> {
   bool isObsceureText = false;
 
-  final bool hasLowerCase = false;
-  final bool hasUpperCase = false;
-  final bool hasSpecialChar = false;
-  final bool hasNumber = false;
-  final bool hasMinLength = false;
+  bool hasLowerCase = false;
+  bool hasUpperCase = false;
+  bool hasSpecialChar = false;
+  bool hasNumber = false;
+  bool hasMinLength = false;
 
   late TextEditingController passwordController;
   @override
   void initState() {
     super.initState();
     passwordController = context.read<LoginCubitCubit>().passwordController;
+    setupPasswordControllerListener();
+  }
+
+  void setupPasswordControllerListener() {
+    passwordController.addListener(() {
+      setState(() {
+        hasLowerCase = AppRegex.hasLowerCase(passwordController.text);
+        hasUpperCase = AppRegex.hasUpperCase(passwordController.text);
+        hasNumber = AppRegex.hasNumber(passwordController.text);
+        hasMinLength = AppRegex.hasMinLength(passwordController.text);
+        hasSpecialChar = AppRegex.hasSpecialCharacter(passwordController.text);
+      });
+    });
   }
 
   @override
@@ -39,7 +53,9 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
         children: [
           AppTextFormField(
             validator: (value) {
-              if (value == null || value.isEmpty) {
+              if (value == null ||
+                  value.isEmpty ||
+                  !AppRegex.isEmailValid(value)) {
                 return 'Please enter valid email';
               }
             },
@@ -88,5 +104,11 @@ class _EmailAndPasswordState extends State<EmailAndPassword> {
         ],
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    passwordController.dispose();
+    super.dispose();
   }
 }

@@ -1,22 +1,21 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:advanced/core/helpers/spacing.dart';
 import 'package:advanced/core/theming/style.dart';
 import 'package:advanced/core/widgets/app_button.dart';
+import 'package:advanced/features/Login/data/models/login_request_body.dart';
+import 'package:advanced/features/Login/logic/cubit/login_cubit_cubit.dart';
 import 'package:advanced/features/Login/ui/widgets/email_and_password.dart';
 import 'package:advanced/features/Login/ui/widgets/already_have_account.dart';
+import 'package:advanced/features/Login/ui/widgets/login_bloc_listener.dart';
 import 'package:advanced/features/Login/ui/widgets/terms_and_conditions.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class LoginScreen extends StatefulWidget {
+class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
 
-  @override
-  State<LoginScreen> createState() => _LoginScreenState();
-}
-
-class _LoginScreenState extends State<LoginScreen> {
-  final formKey = GlobalKey<FormState>();
-  bool isObsecure = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,11 +46,17 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                     verticalSpace(25.h),
-                    AppButton(buttonText: 'Login', onPressed: () {}),
+                    AppButton(
+                      buttonText: 'Login',
+                      onPressed: () {
+                        validateThenLogin(context);
+                      },
+                    ),
                     verticalSpace(16.h),
                     const TermsAndConditionsText(),
                     verticalSpace(64.h),
                     const AlreadyHaveAccountText(),
+                    const LoginBlocListener(),
                   ],
                 ),
               ],
@@ -60,5 +65,16 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       ),
     );
+  }
+
+  void validateThenLogin(BuildContext context) {
+    if (context.read<LoginCubitCubit>().formKey.currentState!.validate()) {
+      context.read<LoginCubitCubit>().emitLoginState(
+        LoginRequestBody(
+          email: context.read<LoginCubitCubit>().emailController.text,
+          password: context.read<LoginCubitCubit>().passwordController.text,
+        ),
+      );
+    }
   }
 }
