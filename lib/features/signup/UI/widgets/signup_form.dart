@@ -61,6 +61,7 @@ class _SignupFormState extends State<SignupForm> {
               if (value == null || value.isEmpty) {
                 return 'Please enter a valid name';
               }
+              return null;
             },
             controller: context.read<SignupCubit>().nameController,
           ),
@@ -76,6 +77,7 @@ class _SignupFormState extends State<SignupForm> {
                   !AppRegex.isPhoneNumberValid(value)) {
                 return 'Please enter a valid phone number';
               }
+              return null;
             },
             controller: context.read<SignupCubit>().phoneController,
           ),
@@ -91,6 +93,7 @@ class _SignupFormState extends State<SignupForm> {
                   !AppRegex.isEmailValid(value)) {
                 return 'Please enter a valid email';
               }
+              return null;
             },
             controller: context.read<SignupCubit>().emailController,
           ),
